@@ -1,0 +1,46 @@
+---
+# set facts to reliably determine os
+- name: discover operating system
+  include: discover/os.yml
+
+# load per-os and per distro variables
+- name: load variables
+  include_vars: "{{ var_loop_item }}"
+  with_items:
+    - "{{ os_name }}/common.yml"
+    - "{{ os_name }}/{{ os_release }}.yml"
+  loop_control: { loop_var: var_loop_item }
+
+- name: include os-specific tasks
+  include: "{{ os_name }}.yml"
+
+# install java and friends
+- name: install java and build packages
+  package: name={{ item }} state=present
+  with_items: "{{ java_packages }}"
+  become: true
+
+- name: install ant
+  package: name={{ ant_package }} state=present
+  become: true
+
+- name: install ivy
+  package: name={{ ivy_package }} state=present
+  become: true
+
+- name: install gradle
+  include: gradle.yml
+
+- name: install maven
+  package: name={{ maven_package }} state=present
+  become: true
+
+- name: install sbt
+  package: name=sbt state=present
+  become: true
+
+# install additional packages
+- name: install additional system packages
+  package: name={{ item }} state=present
+  with_items: "{{ addtl_java_system_packages }}"
+  become: true

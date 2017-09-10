@@ -1,0 +1,26 @@
+---
+- name: install https apt transport
+  package: name=apt-transport-https state=present
+  become: true
+
+# scala build tool key
+- name: install sbt key
+  apt_key:
+    state: present
+    id: 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+    keyserver: hkp://keyserver.ubuntu.com:80
+  become: true
+
+# scala build tool repository
+- name: install sbt repository
+  apt_repository:
+    state: present
+    repo: deb https://dl.bintray.com/sbt/debian /
+    filename: sbt
+    update_cache: true
+  become: true
+
+# refresh apt cache
+- name: refresh apt cache
+  apt: update_cache=true cache_valid_time=3600
+  become: true

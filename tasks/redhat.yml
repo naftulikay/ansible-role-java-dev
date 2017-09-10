@@ -1,0 +1,11 @@
+---
+# scala build tool
+- name: install sbt repository
+  yum_repository:
+    name: sbt
+    description: sbt
+    enabled: true
+    baseurl: https://sbt.bintray.com/rpm
+    gpgcheck: false # these packages aren't signed :(
+    gpgkey: https://bintray.com/user/downloadSubjectPublicKey?username=sbt
+  become: true

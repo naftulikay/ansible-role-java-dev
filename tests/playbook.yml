@@ -1,0 +1,24 @@
+---
+- name: setup
+  hosts: localhost
+  vars:
+    container_user: vagrant
+  tasks:
+    - name: create user
+      user: name={{ container_user }} comment="Container User" shell=/bin/bash state=present
+
+- name: build
+  hosts: localhost
+  roles:
+    - role: java-dev
+
+- name: test
+  hosts: localhost
+  vars: {}
+  roles:
+    - role: degoss
+      degoss_debug: true
+      degoss_clean: false
+      goss_file: goss-test.yml
+      goss_addtl_dirs: [goss.d/]
+      goss_env_vars: {}

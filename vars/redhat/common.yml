@@ -1,0 +1,8 @@
+---
+java_packages:
+  - java-1.8.0-openjdk-headless
+  - java-1.8.0-openjdk-devel
+
+ant_package: ant
+ivy_package: ivy
+maven_package: maven

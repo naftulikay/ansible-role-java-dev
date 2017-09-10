@@ -1,0 +1,7 @@
+---
+java_packages:
+  - openjdk-8-jdk-headless
+
+ant_package: ant
+ivy_package: ivy
+maven_package: maven

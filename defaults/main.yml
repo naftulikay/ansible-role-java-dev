@@ -1,0 +1,4 @@
+---
+gradle_version: "4.1"
+
+addtl_java_system_packages: []
