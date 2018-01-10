@@ -1,7 +1,7 @@
 ---
 # set facts to reliably determine os
 - name: discover operating system
-  include: discover/os.yml
+  include_tasks: discover/os.yml
 
 # load per-os and per distro variables
 - name: load variables
@@ -12,7 +12,7 @@
   loop_control: { loop_var: var_loop_item }
 
 - name: include os-specific tasks
-  include: "{{ os_name }}.yml"
+  include_tasks: "{{ os_name }}.yml"
 
 # install java and friends
 - name: install java and build packages
@@ -29,7 +29,7 @@
   become: true
 
 - name: install gradle
-  include: gradle.yml
+  include_tasks: gradle.yml
 
 - name: install maven
   package: name={{ maven_package }} state=present

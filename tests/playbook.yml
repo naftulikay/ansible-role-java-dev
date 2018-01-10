@@ -19,6 +19,6 @@
     - role: degoss
       degoss_debug: true
       degoss_clean: false
-      goss_file: goss-test.yml
-      goss_addtl_dirs: [goss.d/]
+      goss_file: goss.yml
+      goss_addtl_dirs: [goss.d]
       goss_env_vars: {}
